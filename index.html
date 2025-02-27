@@ -109,10 +109,11 @@
 
         <div style="height: 80vh; width: 100v; display: flex; flex-direction: column; align-items: center; ">
             <!-- <select id="chooseCamSel" style="display: none;" onchange="SelectCam()"></select> -->
-            <img src="Logo.png" style="width: auto; height: 30vh;">
-            <p id="text_infro" style="text-align: center;font-size: 60px; font-weight: bold;">需要訪問設備的相機和運動傳感器</p>
+            <img src="Logo.png" style="width: auto; height: 20vh;">
+            <p id="text_infro" style="white-space: nowrap;width: auto;font-size: min(6vw, 200px);text-align: center; font-weight: bold;">需要訪問設備的相機和運動傳感器</p>
             <button id="requestPermissionsButton" onclick="RequestPermissions()">請求相機與位置授權</button>
-            <p id="text_Authorization" style="display:none;text-align: center;font-size: 60px; font-weight: bold;"> 授權成功</p>
+            <p id="text_Authorization" style="display:none;text-align: center;font-size: 60px; font-weight: bold;"> 授權成功
+            </p>
             <button id="startARButton" style="display:none;font-weight: bold; color:rgb(255, 255, 255)"
                 onclick="StartAR()">開始</button>
 
@@ -371,7 +372,10 @@
         function RequestPermissions() {
             let cameraGranted = false;
             let locationGranted = false;
-
+            // **如果相機和位置都授權，顯示按鈕**
+            if (cameraGranted && locationGranted) {
+                document.getElementById("startARButton").style.display = "block";
+            }
             // 檢查是否可以顯示 StartAR 按鈕
             function checkPermissions() {
                 if (cameraGranted && locationGranted) {
