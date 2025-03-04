@@ -53,6 +53,28 @@
             font-size: 22px;
             padding: 15px 30px;
         }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ccc;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+            /* 預設隱藏 */
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -107,6 +129,8 @@
             <p id="text_infro" style="white-space: nowrap;width: auto;
             font-size: min(6vw, 200px) ;text-align: center; font-weight: bold;color: white;">需要訪問設備的相機和運動傳感器</p>
             <button id="requestPermissionsButton" onclick="RequestPermissions()">請求相機與位置授權</button>
+
+    <div class="loading-spinner" id="spinner"></div>
             <p id="text_Authorization"
                 style="display:none;text-align: center;font-size: 60px; font-weight: bold;color: white"> 授權成功
             </p>
@@ -373,11 +397,19 @@
             if (cameraGranted /* && locationGranted */) {
                 document.getElementById("startARButton").style.display = "block";
             }
+            // 顯示旋轉圈
+            const spinner = document.getElementById("spinner");
+            spinner.style.display = "block"; // 顯示旋轉圈
+
+            // setTimeout(() => {
+            //     spinner.style.display = "none"; // 模擬讀取完成後隱藏
+            //     alert("讀取完成！");
+            // }, 3000); // 假設讀取時間 3 秒
 
             navigator.permissions.query({ name: 'camera' }).then((result) => {
                 console.log("相機權限狀態:", result.state);
                 if (result.state === "granted") {
-                    console.log("相機已授權");   cameraGranted = true;  checkPermissions();
+                    console.log("相機已授權"); cameraGranted = true; checkPermissions();
                 } else if (result.state === "prompt") {
                     console.log("相機授權尚未決定");
                     // 相機授權
@@ -420,6 +452,7 @@
             // 檢查是否可以顯示 StartAR 按鈕
             function checkPermissions() {
                 if (cameraGranted /* && locationGranted */) {
+                    spinner.style.display = "none";
                     document.getElementById("startARButton").style.display = "block";
                     document.getElementById("requestPermissionsButton").style.display = "none";
                     document.getElementById("text_infro").style.display = "none";
