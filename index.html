@@ -379,15 +379,6 @@
             if (cameraGranted && locationGranted) {
                 document.getElementById("startARButton").style.display = "block";
             }
-            // 檢查是否可以顯示 StartAR 按鈕
-            function checkPermissions() {
-                if (cameraGranted && locationGranted) {
-                    document.getElementById("startARButton").style.display = "block";
-                    document.getElementById("requestPermissionsButton").style.display = "none";
-                    document.getElementById("text_infro").style.display = "none";
-                    document.getElementById("text_Authorization").style.display = "block";
-                }
-            }
 
             // 相機授權
             navigator.mediaDevices.getUserMedia({ video: true })
@@ -407,6 +398,16 @@
                 },
                 error => console.error("Location access denied", error)
             );
+            // 檢查是否可以顯示 StartAR 按鈕
+            function checkPermissions() {
+                if (cameraGranted && locationGranted) {
+                    document.getElementById("startARButton").style.display = "block";
+                    document.getElementById("requestPermissionsButton").style.display = "none";
+                    document.getElementById("text_infro").style.display = "none";
+                    document.getElementById("text_Authorization").style.display = "block";
+                }
+            }
+
         }
     </script>
 </body>
