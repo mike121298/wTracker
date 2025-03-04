@@ -114,7 +114,7 @@
                 onclick="StartAR()">開始</button>
 
         </div>
-            <select id="chooseCamSel" style="display: block;" onchange="SelectCam()"></select>
+        <select id="chooseCamSel" style="display: block;" onchange="SelectCam()"></select>
     </div>
     <div id="screenshotDiv" style="display: none;" class="ctaDiv">
         <div
@@ -202,7 +202,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-		window.unityFacingMode = "environment"
+        window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
@@ -374,6 +374,31 @@
                 document.getElementById("startARButton").style.display = "block";
             }
 
+            navigator.permissions.query({ name: 'camera' }).then((result) => {
+                console.log("相機權限狀態:", result.state);
+                if (result.state === "granted") {
+                    console.log("相機已授權");   cameraGranted = true;  checkPermissions();
+                } else if (result.state === "prompt") {
+                    console.log("相機授權尚未決定");
+                    // 相機授權
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(() => {
+                            console.log("Camera access granted");
+                            cameraGranted = true;
+                            checkPermissions();
+                        })
+                        .catch(err => console.log("Camera access denied", err));
+                } else {
+                    console.log("相機被拒絕");
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(() => {
+                            console.log("Camera access granted");
+                            cameraGranted = true;
+                            checkPermissions();
+                        })
+                        .catch(err => console.log("Camera access denied", err));
+                }
+            });
             // 相機授權
             // navigator.mediaDevices.getUserMedia({ video: true })
             //     .then(() => {
@@ -393,7 +418,6 @@
             //     error => console.error("Location access denied", error)
             // );
             // 檢查是否可以顯示 StartAR 按鈕
-            document.getElementById("startARButton").style.display = "block";
             function checkPermissions() {
                 if (cameraGranted /* && locationGranted */) {
                     document.getElementById("startARButton").style.display = "block";
