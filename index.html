@@ -114,7 +114,7 @@
                 onclick="StartAR()">開始</button>
 
         </div>
-        <select id="chooseCamSel" style="display: block;" onchange="SelectCam()"></select>
+            <select id="chooseCamSel" style="display: block;" onchange="SelectCam()"></select>
     </div>
     <div id="screenshotDiv" style="display: none;" class="ctaDiv">
         <div
@@ -375,13 +375,13 @@
             }
 
             // 相機授權
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(() => {
-                    console.log("Camera access granted");
-                    cameraGranted = true;
-                    checkPermissions();
-                })
-                .catch(err => console.log("Camera access denied", err));
+            // navigator.mediaDevices.getUserMedia({ video: true })
+            //     .then(() => {
+            //         console.log("Camera access granted");
+            //         cameraGranted = true;
+            //         checkPermissions();
+            //     })
+            //     .catch(err => console.log("Camera access denied", err));
 
             // // 位置授權
             // navigator.geolocation.getCurrentPosition(
@@ -393,6 +393,7 @@
             //     error => console.error("Location access denied", error)
             // );
             // 檢查是否可以顯示 StartAR 按鈕
+            document.getElementById("startARButton").style.display = "block";
             function checkPermissions() {
                 if (cameraGranted /* && locationGranted */) {
                     document.getElementById("startARButton").style.display = "block";
