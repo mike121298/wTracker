@@ -208,7 +208,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-		window.unityFacingMode = "environment"
+        window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
@@ -374,9 +374,9 @@
 
         function RequestPermissions() {
             let cameraGranted = false;
-            let locationGranted = false;
+            // let locationGranted = false;
             // **如果相機和位置都授權，顯示按鈕**
-            if (cameraGranted && locationGranted) {
+            if (cameraGranted /* && locationGranted */) {
                 document.getElementById("startARButton").style.display = "block";
             }
 
@@ -387,20 +387,20 @@
                     cameraGranted = true;
                     checkPermissions();
                 })
-                .catch(err => console.error("Camera access denied", err));
+                .catch(err => console.log("Camera access denied", err));
 
-            // 位置授權
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    console.log("Location access granted", position);
-                    locationGranted = true;
-                    checkPermissions();
-                },
-                error => console.error("Location access denied", error)
-            );
+            // // 位置授權
+            // navigator.geolocation.getCurrentPosition(
+            //     position => {
+            //         console.log("Location access granted", position);
+            //         locationGranted = true;
+            //         checkPermissions();
+            //     },
+            //     error => console.error("Location access denied", error)
+            // );
             // 檢查是否可以顯示 StartAR 按鈕
             function checkPermissions() {
-                if (cameraGranted && locationGranted) {
+                if (cameraGranted /* && locationGranted */) {
                     document.getElementById("startARButton").style.display = "block";
                     document.getElementById("requestPermissionsButton").style.display = "none";
                     document.getElementById("text_infro").style.display = "none";
