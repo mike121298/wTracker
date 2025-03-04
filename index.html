@@ -229,7 +229,7 @@
             catch (err) {
                 //user denied camera permission - show error panel
                 console.error("getUserMedia error - ", err);
-                ShowError("Failed to start the experience. Camera permission was denied");
+                ShowError("未能開始體驗。相機許可被拒絕，請重新整理後授權後再試。");
                 window.requestingForCameraPermission = false;
             }
         }
@@ -238,7 +238,7 @@
 
             while (window.requestingForCameraPermission) {
                 // Wait until requestingForCameraPermission becomes true.
-                console.log("Waiting for permissions...");
+                console.log("等待權限...");
                 await new Promise(resolve => setTimeout(resolve, 100)); // Adjust the delay time as needed.
             }
 
