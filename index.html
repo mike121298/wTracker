@@ -7,7 +7,7 @@
         content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes'>
     <title>遇見歐若菈AR|台北市立天文科學教育館</title>
     <link rel="stylesheet" href="TemplateData/style.css">
-
+    <link rel="icon" href="logo.png" type="image/png">
     <style>
         html {
             height: -webkit-fill-available;
@@ -37,9 +37,9 @@
         }
 
         #startARButton {
-            padding: 20px 80px;
+            padding: 10px 80px;
             /* 設定內邊距 */
-            font-size: 22px;
+            font-size: 30px;
             font-weight: bold;
             color: white;
             border: 20px solid transparent;
@@ -67,9 +67,9 @@
 
         #requestPermissionsButton {
 
-            padding: 20px 40px;
+            padding: 10px 40px;
             /* 設定內邊距 */
-            font-size: 22px;
+            font-size: 30px;
             font-weight: bold;
             color: white;
             border: 20px solid transparent;
@@ -171,16 +171,17 @@
         <div style=" height: 80vh; width:auto; display: flex; flex-direction: column; align-items: center; ">
             <img src="Logo.png" style="width: auto; height: 30vh;">
             <button id="requestPermissionsButton" onclick="RequestPermissions()">請求相機與運動傳感器授權</button>
-            <p id="text_infro" style="white-space: nowrap;width: auto;margin: 5;
-            font-size: min(6vw, 80px) ;text-align: center; font-weight: bold;color: white;">需要訪問設備的相機和運動傳感器</p>
+            <p id="text_infro" style="white-space: nowrap;width: auto;
+            font-size: min(6vw, 80px) ;text-align: center; font-weight: bold;color: white;margin: 0;">需要訪問設備的相機和運動傳感器
+            </p>
             <p id="text_infro_denied" style="white-space: nowrap;width: auto;margin: 0;
             font-size: min(4vw, 40px) ;text-align: center; font-weight: bold;color: rgb(255, 0, 0);display:none;">
                 相機訪問被拒絕。</p>
             <div class="loading-spinner" id="spinner"></div>
             <button id="startARButton" style=" display:none;font-weight: bold; color:rgb(255, 255, 255)"
                 onclick="StartAR()">開始</button>
-            <p id="text_Authorization"
-                style="display:none;text-align: center; font-size: min(6vw, 80px) ; margin: 5; font-weight: bold;color: white">
+            <p id="text_Authorization" style="display:none;text-align: center; font-size: min(6vw, 80px) ; 
+                 font-weight: bold;color: white;margin: 0;">
                 授權成功
             </p>
 
@@ -201,10 +202,10 @@
     </div>
     <div id="unity-container" class="unity-mobile">
         <canvas id="unity-canvas" style="width: 100%; height: 100%; background: #231F20; z-index: -99;"></canvas>
-        <div id="unity-loading-bar"style="display: block;">
+        <div id="unity-loading-bar" style="display: block;">
             <!-- <img src="Logo.png" style="width:40vw; height: auto; align-items: center; "></img> -->
             <div id="unity-logo2"></div>
-                <div id="unity-logo" ></div> 
+            <div id="unity-logo"></div>
             <div id="unity-progress-bar-empty">
                 <div id="unity-progress-bar-full"></div>
             </div>
@@ -276,7 +277,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-		window.unityFacingMode = "environment"
+        window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
