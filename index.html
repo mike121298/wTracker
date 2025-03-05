@@ -37,22 +37,62 @@
         }
 
         #startARButton {
-            background: rgb(61, 61, 61);
-            color: white;
-            width: 250px;
-            height: 70px;
+            padding: 20px 80px;
+            /* 設定內邊距 */
             font-size: 22px;
-            padding: 15px 30px;
+            font-weight: bold;
+            color: white;
+            border: 20px solid transparent;
+            /* 設定透明邊框 */
+
+            /* 使用同一張圖片處理邊框 */
+            border-image: url('__BT_1.png') 30 stretch;
+            /* 邊框圖片的切片設定 */
+
+            /* 使用同一張圖片填充中間區域 */
+            background-image: url("__BT_2.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            /* 背景圖片置中 */
+            background-size: 105% 105%;
+            /* 背景圖片填充整個區域 */
+
+            background-color: transparent;
+            /* 確保背景透明 */
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         #requestPermissionsButton {
-            background-color: rgb(255, 0, 0);
-            /* 漸層顏色 */
-            color: white;
-            font-weight: bold;
-            height: 70px;
+
+            padding: 20px 40px;
+            /* 設定內邊距 */
             font-size: 22px;
-            padding: 15px 30px;
+            font-weight: bold;
+            color: white;
+            border: 20px solid transparent;
+            /* 設定透明邊框 */
+
+            /* 使用同一張圖片處理邊框 */
+            border-image: url('__BT_1.png') 30 stretch;
+            /* 邊框圖片的切片設定 */
+
+            /* 使用同一張圖片填充中間區域 */
+            background-image: url("__BT_2.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            /* 背景圖片置中 */
+            background-size: 105% 105%;
+            /* 背景圖片填充整個區域 */
+
+            background-color: transparent;
+            /* 確保背景透明 */
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .loading-spinner {
@@ -160,9 +200,11 @@
         <p id="errorText" style="text-align: center; width:60vw; color:white"></p>
     </div>
     <div id="unity-container" class="unity-mobile">
-        <canvas id="unity-canvas" style="width: 100%; height: 100%; background: #0000; z-index: -99;"></canvas>
-        <div id="unity-loading-bar">
-            <div id="unity-logo"></div>
+        <canvas id="unity-canvas" style="width: 100%; height: 100%; background: #231F20; z-index: -99;"></canvas>
+        <div id="unity-loading-bar"style="display: block;">
+            <!-- <img src="Logo.png" style="width:40vw; height: auto; align-items: center; "></img> -->
+            <div id="unity-logo2"></div>
+                <div id="unity-logo" ></div> 
             <div id="unity-progress-bar-empty">
                 <div id="unity-progress-bar-full"></div>
             </div>
@@ -234,7 +276,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-        window.unityFacingMode = "environment"
+		window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
@@ -465,7 +507,7 @@
                     document.getElementById("requestPermissionsButton").style.display = "none";
                     document.getElementById("text_infro").style.display = "none";
                     document.getElementById("text_Authorization").style.display = "block";
-                     document.getElementById("text_infro_denied").style.display = "none";
+                    document.getElementById("text_infro_denied").style.display = "none";
                 }
             }
 
