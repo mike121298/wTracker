@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes'>
-    <title>Unity WebGL Player | ARWorld</title>
+    <title>遇見歐若菈AR|台北市立天文科學教育館</title>
     <link rel="stylesheet" href="TemplateData/style.css">
 
     <style>
@@ -47,6 +47,7 @@
 
         #requestPermissionsButton {
             background-color: rgb(255, 0, 0);
+            /* 漸層顏色 */
             color: white;
             font-weight: bold;
             height: 70px;
@@ -55,16 +56,19 @@
         }
 
         .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #ccc;
-            border-top: 4px solid #007bff;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
+            /*  border: 4px solid transparent;  */
+            /* 設置透明邊框 */
+            background: conic-gradient(#575490, #A37AAD);
+            /* 漸層色 */
+            mask: radial-gradient(circle, transparent 60%, black 61%);
+            -webkit-mask: radial-gradient(circle, transparent 60%, black 61%);
             animation: spin 1s linear infinite;
             display: none;
-            /* 預設隱藏 */
-            margin: 10px auto;
         }
+
 
         @keyframes spin {
             0% {
@@ -124,18 +128,22 @@
             <img src="__天文館Logo.png" style="width: 200px; height: auto;">
         </div>
 
-        <div style=" height: 80vh; width: 100v; display: flex; flex-direction: column; align-items: center; ">
+        <div style=" height: 80vh; width:auto; display: flex; flex-direction: column; align-items: center; ">
             <img src="Logo.png" style="width: auto; height: 30vh;">
-            <p id="text_infro" style="white-space: nowrap;width: auto;
-            font-size: min(6vw, 200px) ;text-align: center; font-weight: bold;color: white;">需要訪問設備的相機和運動傳感器</p>
-            <button id="requestPermissionsButton" onclick="RequestPermissions()">請求相機與位置授權</button>
-
-    <div class="loading-spinner" id="spinner"></div>
-            <p id="text_Authorization"
-                style="display:none;text-align: center;font-size: 60px; font-weight: bold;color: white"> 授權成功
-            </p>
+            <button id="requestPermissionsButton" onclick="RequestPermissions()">請求相機與運動傳感器授權</button>
+            <p id="text_infro" style="white-space: nowrap;width: auto;margin: 5;
+            font-size: min(6vw, 80px) ;text-align: center; font-weight: bold;color: white;">需要訪問設備的相機和運動傳感器</p>
+            <p id="text_infro_denied" style="white-space: nowrap;width: auto;margin: 0;
+            font-size: min(4vw, 40px) ;text-align: center; font-weight: bold;color: rgb(255, 0, 0);display:none;">
+                相機訪問被拒絕。</p>
+            <div class="loading-spinner" id="spinner"></div>
             <button id="startARButton" style=" display:none;font-weight: bold; color:rgb(255, 255, 255)"
                 onclick="StartAR()">開始</button>
+            <p id="text_Authorization"
+                style="display:none;text-align: center; font-size: min(6vw, 80px) ; margin: 5; font-weight: bold;color: white">
+                授權成功
+            </p>
+
 
         </div>
         <select id="chooseCamSel" style="display: block;" onchange="SelectCam()"></select>
@@ -411,7 +419,7 @@
                 if (result.state === "granted") {
                     console.log("相機已授權"); cameraGranted = true; checkPermissions();
                 } else if (result.state === "prompt") {
-                    console.log("相機授權尚未決定");
+                    console.log("相機授權尚未決定...");
                     // 相機授權
                     navigator.mediaDevices.getUserMedia({ video: true })
                         .then(() => {
@@ -419,16 +427,16 @@
                             cameraGranted = true;
                             checkPermissions();
                         })
-                        .catch(err => console.log("Camera access denied", err));
+                        .catch(err => { console.log("相機授權尚未決定", err); spinner.style.display = "none"; document.getElementById("text_infro_denied").style.display = "block"; });
                 } else {
-                    console.log("相機被拒絕");
+                    console.log("相機被拒絕...");
                     navigator.mediaDevices.getUserMedia({ video: true })
                         .then(() => {
                             console.log("Camera access granted");
                             cameraGranted = true;
                             checkPermissions();
                         })
-                        .catch(err => console.log("Camera access denied", err));
+                        .catch(err => { console.log("相機被拒絕", err); spinner.style.display = "none"; document.getElementById("text_infro_denied").style.display = "block"; });
                 }
             });
             // 相機授權
@@ -457,6 +465,7 @@
                     document.getElementById("requestPermissionsButton").style.display = "none";
                     document.getElementById("text_infro").style.display = "none";
                     document.getElementById("text_Authorization").style.display = "block";
+                     document.getElementById("text_infro_denied").style.display = "none";
                 }
             }
 
