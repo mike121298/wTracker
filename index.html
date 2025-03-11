@@ -268,11 +268,7 @@
                 loadingBar.style.display = "none";
             });
             StartMotionSensors();
-
             // StartGPS()
-
-
-
             loadingBar.style.display = "block";
         }
 
@@ -311,8 +307,10 @@
                 await new Promise(resolve => setTimeout(resolve, 100)); // Adjust the delay time as needed.
             }
 
-            console.log("Got Permissions");
+            console.log("Got Permissions");    
+  
 
+            
             if (window.webcamStream) {
                 const video = document.querySelector("#webcam-video");
                 video.srcObject = webcamStream;
@@ -514,6 +512,6 @@
 
         }
     </script>
-</body>
+</body> 
 
 </html>
