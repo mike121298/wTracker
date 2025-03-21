@@ -7,7 +7,7 @@
         content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes'>
     <title>遇見歐若菈AR|台北市立天文科學教育館</title>
     <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="icon" href="Logo.png" type="image/png">    
+    <link rel="icon" href="Logo.png" type="image/png">
     <style>
         html {
             height: -webkit-fill-available;
@@ -172,6 +172,14 @@
             <p id="text_infro" style="white-space: nowrap;width: auto;
             font-size: min(6vw, 80px) ;text-align: center; font-weight: bold;color: white;margin: 0;">需要訪問設備的相機
             </p>
+            <p id="text_infro" style="white-space: nowrap;width: auto;
+            font-size: min(4vw, 40px) ;text-align: center; font-weight: bold;color: rgb(195, 206, 207);margin: 0;">
+                本網站僅支援 Safari 或 Google Chrome 瀏覽器。
+            </p>
+            <p id="text_infro" style="white-space: nowrap;width: auto;
+            font-size: min(4vw, 40px) ;text-align: center; font-weight: bold;color: rgb(195, 206, 207);margin: 0;">
+                請使用其中之一以獲得最佳體驗。
+            </p>
             <p id="text_infro_denied" style="white-space: nowrap;width: auto;margin: 0;
             font-size: min(4vw, 40px) ;text-align: center; font-weight: bold;color: rgb(255, 0, 0);display:none;">
                 相機訪問被拒絕。</p>
@@ -271,7 +279,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-		window.unityFacingMode = "environment"
+        window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
@@ -305,10 +313,10 @@
                 await new Promise(resolve => setTimeout(resolve, 100)); // Adjust the delay time as needed.
             }
 
-            console.log("Got Permissions");    
-  
+            console.log("Got Permissions");
 
-            
+
+
             if (window.webcamStream) {
                 const video = document.querySelector("#webcam-video");
                 video.srcObject = webcamStream;
@@ -510,6 +518,6 @@
 
         }
     </script>
-</body> 
+</body>
 
 </html>
