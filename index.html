@@ -511,7 +511,7 @@
                     document.getElementById("text_infro_denied").style.display = "none";
                 }
             }
-            function ShareImageToJavaScript(base64Image) {
+            globalThis.ShareImageToJavaScript = function (base64Image) {
                 const imageUrl = 'data:image/png;base64,' + base64Image;
 
                 if (navigator.share) {
