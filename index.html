@@ -275,7 +275,7 @@
         }
 
         //Set Facing Mode here ('environment', 'user', '')
-		window.unityFacingMode = "environment"
+        window.unityFacingMode = "environment"
 
         window.WEBCAM_SETTINGS = {
             video: {
@@ -511,7 +511,23 @@
                     document.getElementById("text_infro_denied").style.display = "none";
                 }
             }
+            function ShareImageToJavaScript(base64Image) {
+                const imageUrl = 'data:image/png;base64,' + base64Image;
 
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Share Image',
+                        text: 'Check out this image!',
+                        url: imageUrl
+                    }).then(() => {
+                        console.log('Image shared successfully');
+                    }).catch((error) => {
+                        console.log('Error sharing image: ' + error);
+                    });
+                } else {
+                    alert('Sharing is not supported in this browser.');
+                }
+            }
         }
     </script>
 </body>
